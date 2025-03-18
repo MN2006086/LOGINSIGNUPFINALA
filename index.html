@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <br>
+    <title>Welcome to the French Media Site! Login & Sign Up</title>
+    <style>
+        body {
+            font-family: "big-caslon";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+             background-image: url('french-flag-in-white-background-free-vector%20copy.jpg');
+        }
+        
+       
+        }
+        .container {
+            width: 300px;
+            font-family: "big-caslon";
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-image: url('french-flag-in-white-background-free-vector%20copy.jpg');
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            font-family: "big-caslon";
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            font-family: "big-caslon";
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="loginContainer">
+        <h2>Welcome to the French Media Site!</h2>
+        <h2>Login</h2>
+        <input type="text" id="loginUser" placeholder="Username">
+        <input type="password" id="loginPass" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p>Don't have an account? <a href="#" onclick="toggleForm()">Sign Up</a></p>
+    </div>
+    
+   
+    <div class="container" id="signupContainer" style="display:none;">
+        <h2>Sign Up</h2>
+        <input type="text" id="signupUser" placeholder="Username">
+        <input type="password" id="signupPass" placeholder="Password">
+        <button onclick="signup()">Sign Up</button>
+        <p>Already have an account? <a href="#" onclick="toggleForm()">Login</a></p>
+        
+    <p>What is the French Media Site?</p>
+
+        <p>It is a specially designed site full of structured resources for French acquisition learners! Discover videos, playlists and more, specially curated for different proficiency levels.</p>
+   
+    
+    </div>
+    
+   
+    
+<script>
+    // Node class for Linked List
+    class Node {
+        constructor(username, password) {
+            this.username = username;
+            this.password = password;
+            this.next = null;
+        }
+    }
+
+    // Linked List class
+    class LinkedList {
+        constructor() {
+            this.head = null;
+        }
+
+        // Add a new user
+        add(username, password) {
+            let newNode = new Node(username, password);
+            if (!this.head) {
+                this.head = newNode;
+            } else {
+                let temp = this.head;
+                while (temp.next) {
+                    temp = temp.next;
+                }
+                temp.next = newNode;
+            }
+        }
+
+        // Check if user exists
+        find(username) {
+            let temp = this.head;
+            while (temp) {
+                if (temp.username === username) {
+                    return temp;
+                }
+                temp = temp.next;
+            }
+            return null;
+        }
+    }
+
+    // Initialize Linked List + sample users
+    let userList = new LinkedList();
+    userList.add("Alice", "password123");
+    userList.add("Bob", "qwerty");
+    
+    //Switch between the two
+    function toggleForm() {
+        document.getElementById('loginContainer').style.display =
+            document.getElementById('loginContainer').style.display === 'none' ? 'block' : 'none';
+        document.getElementById('signupContainer').style.display =
+            document.getElementById('signupContainer').style.display === 'none' ? 'block' : 'none';
+    }
+
+    //Login function and redirect 
+    function login() {
+        let user = document.getElementById('loginUser').value;
+        let pass = document.getElementById('loginPass').value;
+
+        let foundUser = userList.find(user);
+        if (foundUser && foundUser.password === pass) {
+            alert('Logged in as ' + user);
+            window.location.href = "https://mn2006086.github.io/LandingPageFinal/"; // Redirect on success
+        } else {
+            alert('Invalid username or password');
+        }
+    }
+
+        //Sign-Up function and redirect 
+    function signup() {
+        let user = document.getElementById('signupUser').value;
+        let pass = document.getElementById('signupPass').value;
+
+        if (userList.find(user)) {
+            alert('Username already exists. Choose another.');
+        } else {
+            userList.add(user, pass);
+            alert('Account created for ' + user);
+            window.location.href = "https://mn2006086.github.io/LandingPageFinal/"; // Redirect on signup
+        }
+    }
+</script>
+
+
+</body>
+</html>
